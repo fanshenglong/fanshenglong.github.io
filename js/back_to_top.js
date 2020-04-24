@@ -1,6 +1,4 @@
-$(document).ready(loadBackTop());
-
-function loadBackTop() {
+$(document).ready(() => {
     const $button = $('#back-to-top');
     const $footer = $('footer.footer');
     const $mainColumn = $('.column-main');
@@ -15,8 +13,7 @@ function loadBackTop() {
             classname: 'card has-text-centered',
             left: '',
             width: 64,
-            bottom: bottomMargin,
-            'border-radius': 4
+            bottom: bottomMargin
         }
     };
     state['desktop-hidden'] = Object.assign({}, state.base, {
@@ -26,9 +23,8 @@ function loadBackTop() {
         classname: state['desktop-hidden'].classname + ' fade-in'
     });
     state['desktop-dock'] = Object.assign({}, state['desktop-visible'], {
-        classname: state['desktop-visible'].classname + ' fade-in',
-        width: 40,
-        'border-radius': '50%'
+        classname: state['desktop-visible'].classname + ' fade-in is-rounded',
+        width: 40
     });
     state['mobile-hidden'] = Object.assign({}, state.base, {
         classname: state.base.classname + ' fade-in',
@@ -84,7 +80,7 @@ function loadBackTop() {
         if (!hasRightSidebar()) {
             return 0;
         }
-        return Math.max.apply(null, $rightSidebar.find('.widget').map(function () {
+        return Math.max.apply(null, $rightSidebar.find('.widget').map(function() {
             return $(this).offset().top + $(this).outerHeight(true);
         }));
     }
@@ -149,4 +145,4 @@ function loadBackTop() {
     $('#back-to-top').on('click', () => {
         $('body, html').animate({ scrollTop: 0 }, 400);
     });
-}
+});
