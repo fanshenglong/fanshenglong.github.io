@@ -11691,6 +11691,20 @@ body.night {
 .night .aplayer .aplayer-list ol li.aplayer-list-light {
   background: #152515;
 }
+.night .message .message-header {
+  background-color: #053452;
+}
+.night .message {
+  background-color: transparent;
+}
+.night .time-axis-main .time-axis-title {
+  background-color: transparent;
+  color: #e2d4d4;
+}
+.night .time-axis-main .time-axis-achievement {
+  background-color: transparent;
+  color: #669c54;
+}
 .link-items {
   display: flex;
   padding: 0 0.5rem;
