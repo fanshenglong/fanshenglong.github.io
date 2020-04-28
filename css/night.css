@@ -332,3 +332,15 @@ body.night {
   -webkit-text-fill-color: #c0c0c0 !important;
   box-shadow: 0 0 0px 1000px #373d48 inset;
 }
+.night .aplayer {
+  background-color: transparent;
+}
+.night .aplayer .aplayer-lrc p {
+  color: #2dd2d2;
+}
+.night .aplayer .aplayer-lrc:after {
+  background: linear-gradient(180deg, rgba(150,63,63,0) 0, #191e3e);
+}
+.night .aplayer .aplayer-list ol li.aplayer-list-light {
+  background: #152515;
+}
