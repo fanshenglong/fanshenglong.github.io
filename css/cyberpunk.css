@@ -11699,12 +11699,15 @@ body.night {
   background-color: transparent;
 }
 .night .time-axis-main .time-axis-title {
-  background-color: transparent;
+  background-color: rgba(68,68,68,0.267);
   color: #e2d4d4;
 }
 .night .time-axis-main .time-axis-achievement {
   background-color: transparent;
   color: #669c54;
+}
+.night #hitokoto {
+  background-color: rgba(42,41,41,0.278);
 }
 .link-items {
   display: flex;
@@ -11840,7 +11843,7 @@ body.night {
 .time-axis-main .time-axis:before {
   content: '';
   position: absolute;
-  left: 74px;
+  left: 76px;
   top: 15px;
   width: 1px;
   height: 100%;

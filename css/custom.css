@@ -132,7 +132,7 @@
 .time-axis-main .time-axis:before {
   content: '';
   position: absolute;
-  left: 74px;
+  left: 76px;
   top: 15px;
   width: 1px;
   height: 100%;
