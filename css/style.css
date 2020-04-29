@@ -11842,7 +11842,7 @@ body.night {
 .time-axis-main .time-axis:before {
   content: '';
   position: absolute;
-  left: 76px;
+  left: 75px;
   top: 15px;
   width: 1px;
   height: 100%;
