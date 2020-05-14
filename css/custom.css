@@ -163,3 +163,7 @@
   float: right;
   margin-top: -5px;
 }
+#toc {
+  height: 400px;
+  overflow: auto;
+}
