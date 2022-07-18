@@ -58,6 +58,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.link-item .link-desc:hover {
+  text-overflow: inherit;
+  overflow: visible;
+  white-space: pre-line;
+}
 .time-axis-main {
   width: 90%;
   margin: 30px auto;
