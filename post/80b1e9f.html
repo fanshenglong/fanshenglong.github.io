@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java基础-泛型 | fansl的个人博客</title><meta name="author" content="fanshenglong"><meta name="copyright" content="fanshenglong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="为什么需要泛型？ 转载于：https:&#x2F;&#x2F;www.pdai.tech&#x2F;md&#x2F;interview&#x2F;x-interview.html#12-%E6%B3%9B%E5%9E%8B著作权归https:&#x2F;&#x2F;pdai.tech所有。 链接：https:&#x2F;&#x2F;www.pdai.tech&#x2F;md&#x2F;interview&#x2F;x-interview.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础-泛型">
+<meta property="og:url" content="http://blog.fansl.com.cn/post/80b1e9f.html">
+<meta property="og:site_name" content="fansl的个人博客">
+<meta property="og:description" content="为什么需要泛型？ 转载于：https:&#x2F;&#x2F;www.pdai.tech&#x2F;md&#x2F;interview&#x2F;x-interview.html#12-%E6%B3%9B%E5%9E%8B著作权归https:&#x2F;&#x2F;pdai.tech所有。 链接：https:&#x2F;&#x2F;www.pdai.tech&#x2F;md&#x2F;interview&#x2F;x-interview.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-07-21T08:44:09.000Z">
+<meta property="article:modified_time" content="2023-11-30T08:23:55.079Z">
+<meta property="article:author" content="fanshenglong">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Java基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://blog.fansl.com.cn/post/80b1e9f.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java基础-泛型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-30 16:23:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><style type="text/css">#toggle-sidebar {left: 80px}</style><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/photo/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comment"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="fansl的个人博客"><span class="site-name">fansl的个人博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/photo/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comment"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java基础-泛型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-21T08:44:09.000Z" title="发表于 2022-07-21 16:44:09">2022-07-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-30T08:23:55.079Z" title="更新于 2023-11-30 16:23:55">2023-11-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/Java%E5%9F%BA%E7%A1%80/">Java基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java基础-泛型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="为什么需要泛型？"><a href="#为什么需要泛型？" class="headerlink" title="为什么需要泛型？"></a>为什么需要泛型？</h3><blockquote>
+<p>转载于：<a target="_blank" rel="noopener" href="https://www.pdai.tech/md/interview/x-interview.html#12-%E6%B3%9B%E5%9E%8B">https://www.pdai.tech/md/interview/x-interview.html#12-%E6%B3%9B%E5%9E%8B</a><br>著作权归<a target="_blank" rel="noopener" href="https://pdai.tech所有./">https://pdai.tech所有。</a> 链接：<a target="_blank" rel="noopener" href="https://www.pdai.tech/md/interview/x-interview.html">https://www.pdai.tech/md/interview/x-interview.html</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h4 id="1-适用于多种数据类型执行相同的代码"><a href="#1-适用于多种数据类型执行相同的代码" class="headerlink" title="1.适用于多种数据类型执行相同的代码"></a>1.适用于多种数据类型执行相同的代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    System.out.println(a + <span class="string">&quot;+&quot;</span> + b + <span class="string">&quot;=&quot;</span> + (a + b));</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">float</span> <span class="title function_">add</span><span class="params">(<span class="type">float</span> a, <span class="type">float</span> b)</span> &#123;</span><br><span class="line">    System.out.println(a + <span class="string">&quot;+&quot;</span> + b + <span class="string">&quot;=&quot;</span> + (a + b));</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">add</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span> &#123;</span><br><span class="line">    System.out.println(a + <span class="string">&quot;+&quot;</span> + b + <span class="string">&quot;=&quot;</span> + (a + b));</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果没有泛型，要实现不同类型的加法，每种类型都需要重载一个 add 方法；通过泛型，我们可以复用为一个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; <span class="type">double</span> <span class="title function_">add</span><span class="params">(T a, T b)</span> &#123;</span><br><span class="line">    System.out.println(a + <span class="string">&quot;+&quot;</span> + b + <span class="string">&quot;=&quot;</span> + (a.doubleValue() + b.doubleValue()));</span><br><span class="line">    <span class="keyword">return</span> a.doubleValue() + b.doubleValue();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）"><a href="#2-泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）" class="headerlink" title="2.泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）"></a>2.泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）</h4><p>看下这个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">list.add(<span class="string">&quot;xxString&quot;</span>);</span><br><span class="line">list.add(<span class="number">100d</span>);</span><br><span class="line">list.add(<span class="keyword">new</span> <span class="title class_">Person</span>());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们在使用上述 list 中，list 中的元素都是 Object 类型（无法约束其中的类型），所以在取出集合元素时需要人为的强制类型转化到具体的目标类型，且很容易出现 java.lang.ClassCastException 异常。<br>引入泛型，它将提供类型的约束，提供编译前的检查：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// list中只能放String, 不能放其它类型的元素</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型类如何定义使用？"><a href="#泛型类如何定义使用？" class="headerlink" title="泛型类如何定义使用？"></a>泛型类如何定义使用？</h3><h4 id="从一个简单的泛型类看起："><a href="#从一个简单的泛型类看起：" class="headerlink" title="从一个简单的泛型类看起："></a>从一个简单的泛型类看起：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>&lt;T&gt;&#123;         <span class="comment">// 此处可以随便写标识符号，T是type的简称</span></span><br><span class="line">    <span class="keyword">private</span> T <span class="keyword">var</span> ;     <span class="comment">// var的类型由T指定，即：由外部指定</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getVar</span><span class="params">()</span>&#123;  <span class="comment">// 返回值的类型由外部决定</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setVar</span><span class="params">(T <span class="keyword">var</span>)</span>&#123;  <span class="comment">// 设置的类型也由外部决定</span></span><br><span class="line">        <span class="built_in">this</span>.<span class="keyword">var</span> = <span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericsDemo06</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        Point&lt;String&gt; p = <span class="keyword">new</span> <span class="title class_">Point</span>&lt;String&gt;() ;     <span class="comment">// 里面的var类型为String类型</span></span><br><span class="line">        p.setVar(<span class="string">&quot;it&quot;</span>) ;                            <span class="comment">// 设置字符串</span></span><br><span class="line">        System.out.println(p.getVar().length()) ;   <span class="comment">// 取得字符串的长度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="多元泛型"><a href="#多元泛型" class="headerlink" title="多元泛型"></a>多元泛型</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Notepad</span>&lt;K,V&gt;&#123;       <span class="comment">// 此处指定了两个泛型类型</span></span><br><span class="line">    <span class="keyword">private</span> K key ;     <span class="comment">// 此变量的类型由外部决定</span></span><br><span class="line">    <span class="keyword">private</span> V value ;   <span class="comment">// 此变量的类型由外部决定</span></span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getKey</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.key ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> V <span class="title function_">getValue</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.value ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setKey</span><span class="params">(K key)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.key = key ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setValue</span><span class="params">(V value)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.value = value ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericsDemo09</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        Notepad&lt;String,Integer&gt; t = <span class="literal">null</span> ;        <span class="comment">// 定义两个泛型类型的对象</span></span><br><span class="line">        t = <span class="keyword">new</span> <span class="title class_">Notepad</span>&lt;String,Integer&gt;() ;       <span class="comment">// 里面的key为String，value为Integer</span></span><br><span class="line">        t.setKey(<span class="string">&quot;汤姆&quot;</span>) ;        <span class="comment">// 设置第一个内容</span></span><br><span class="line">        t.setValue(<span class="number">20</span>) ;            <span class="comment">// 设置第二个内容</span></span><br><span class="line">        System.out.print(<span class="string">&quot;姓名；&quot;</span> + t.getKey()) ;      <span class="comment">// 取得信息</span></span><br><span class="line">        System.out.print(<span class="string">&quot;，年龄；&quot;</span> + t.getValue()) ;       <span class="comment">// 取得信息</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口如何定义使用？"><a href="#泛型接口如何定义使用？" class="headerlink" title="泛型接口如何定义使用？"></a>泛型接口如何定义使用？</h3><h4 id="简单的泛型接口"><a href="#简单的泛型接口" class="headerlink" title="简单的泛型接口"></a>简单的泛型接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Info</span>&lt;T&gt;&#123;        <span class="comment">// 在接口上定义泛型</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getVar</span><span class="params">()</span> ; <span class="comment">// 定义抽象方法，抽象方法的返回值就是泛型类型</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">InfoImpl</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Info</span>&lt;T&gt;&#123;   <span class="comment">// 定义泛型接口的子类</span></span><br><span class="line">    <span class="keyword">private</span> T <span class="keyword">var</span> ;             <span class="comment">// 定义属性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">InfoImpl</span><span class="params">(T <span class="keyword">var</span>)</span>&#123;     <span class="comment">// 通过构造方法设置属性内容</span></span><br><span class="line">        <span class="built_in">this</span>.setVar(<span class="keyword">var</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setVar</span><span class="params">(T <span class="keyword">var</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.<span class="keyword">var</span> = <span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getVar</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.<span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericsDemo24</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String arsg[])</span>&#123;</span><br><span class="line">        Info&lt;String&gt; i = <span class="literal">null</span>;        <span class="comment">// 声明接口对象</span></span><br><span class="line">        i = <span class="keyword">new</span> <span class="title class_">InfoImpl</span>&lt;String&gt;(<span class="string">&quot;汤姆&quot;</span>) ;  <span class="comment">// 通过子类实例化对象</span></span><br><span class="line">        System.out.println(<span class="string">&quot;内容：&quot;</span> + i.getVar()) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型方法如何定义使用？"><a href="#泛型方法如何定义使用？" class="headerlink" title="泛型方法如何定义使用？"></a>泛型方法如何定义使用？</h3><p>泛型方法，是在调用方法的时候指明泛型的具体类型</p>
+<h4 id="定义泛型方法语法格式"><a href="#定义泛型方法语法格式" class="headerlink" title="定义泛型方法语法格式"></a>定义泛型方法语法格式</h4><p><img src="http://oss.fansl.com.cn/image/blog/yuque/Fr5rO1WdAnfdFIvGb1MbndXF7vOU.png"></p>
+<h4 id="调用泛型方法语法格式"><a href="#调用泛型方法语法格式" class="headerlink" title="调用泛型方法语法格式"></a>调用泛型方法语法格式</h4><p><img src="http://oss.fansl.com.cn/image/blog/yuque/FmYqH5-ToeKmyYXAB8DuoEjUZcxs.png"></p>
+<blockquote>
+<p>说明一下，定义泛型方法时，必须在返回值前边加一个<code>&lt;T&gt;</code>，来声明这是一个泛型方法，持有一个泛型<code>T</code>，然后才可以用泛型<code>T</code>作为方法的返回值。<br><code>Class&lt;T&gt;</code>的作用就是指明泛型的具体类型，而<code>Class&lt;T&gt;</code>类型的变量 c，可以用来创建泛型类的对象。<br>为什么要用变量<code>c</code>来创建对象呢？既然是泛型方法，就代表着我们不知道具体的类型是什么，也不知道构造方法如何，因此没有办法去<code>new</code>一个对象，但可以利用变量<code>c</code>的<code>newInstance</code>方法去创建对象，也就是利用反射创建对象。<br>泛型方法要求的参数是<code>Class&lt;T&gt;</code>类型，而<code>Class.forName()</code>方法的返回值也是<code>Class&lt;T&gt;</code>，因此可以用<code>Class.forName()</code>作为参数。其中，<code>forName()</code>方法中的参数是何种类型，返回的<code>Class&lt;T&gt;</code>就是何种类型。在本例中，<code>forName()</code>方法中传入的是<code>User</code>类的完整路径，因此返回的是<code>Class&lt;User&gt;</code>类型的对象，因此调用泛型方法时，变量<code>c</code>的类型就是<code>Class&lt;User&gt;</code>，因此泛型方法中的泛型<code>T</code>就被指明为<code>User</code>，因此变量<code>obj</code>的类型为<code>User</code>。<br>当然，泛型方法不是仅仅可以有一个参数<code>Class&lt;T&gt;</code>，可以根据需要添加其他参数。<br><strong>为什么要使用泛型方法呢</strong>？因为泛型类要在实例化的时候就指明类型，如果想换一种类型，不得不重新<code>new</code>一次，可能不够灵活；而泛型方法可以在调用的时候指明类型，更加灵活。</p>
+</blockquote>
+<h3 id="泛型的上限和下限？"><a href="#泛型的上限和下限？" class="headerlink" title="泛型的上限和下限？"></a>泛型的上限和下限？</h3><p>在使用泛型的时候，我们可以为传入的泛型类型实参进行上下边界的限制，如：类型实参只准传入某种类型的父类或某种类型的子类。</p>
+<h4 id="上限"><a href="#上限" class="headerlink" title="上限"></a>上限</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Info</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Number</span>&gt;&#123;    <span class="comment">// 此处泛型只能是数字类型</span></span><br><span class="line">    <span class="keyword">private</span> T <span class="keyword">var</span> ;        <span class="comment">// 定义泛型变量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setVar</span><span class="params">(T <span class="keyword">var</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.<span class="keyword">var</span> = <span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getVar</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.<span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;    <span class="comment">// 直接打印</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.<span class="keyword">var</span>.toString() ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo1</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        Info&lt;Integer&gt; i1 = <span class="keyword">new</span> <span class="title class_">Info</span>&lt;Integer&gt;() ;        <span class="comment">// 声明Integer的泛型对象</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="下限"><a href="#下限" class="headerlink" title="下限"></a>下限</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Info</span>&lt;T&gt;&#123;</span><br><span class="line">    <span class="keyword">private</span> T <span class="keyword">var</span> ;        <span class="comment">// 定义泛型变量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setVar</span><span class="params">(T <span class="keyword">var</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.<span class="keyword">var</span> = <span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getVar</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.<span class="keyword">var</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;    <span class="comment">// 直接打印</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.<span class="keyword">var</span>.toString() ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericsDemo21</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        Info&lt;String&gt; i1 = <span class="keyword">new</span> <span class="title class_">Info</span>&lt;String&gt;() ;        <span class="comment">// 声明String的泛型对象</span></span><br><span class="line">        Info&lt;Object&gt; i2 = <span class="keyword">new</span> <span class="title class_">Info</span>&lt;Object&gt;() ;        <span class="comment">// 声明Object的泛型对象</span></span><br><span class="line">        i1.setVar(<span class="string">&quot;hello&quot;</span>) ;</span><br><span class="line">        i2.setVar(<span class="keyword">new</span> <span class="title class_">Object</span>()) ;</span><br><span class="line">        fun(i1) ;</span><br><span class="line">        fun(i2) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">(Info&lt;? <span class="built_in">super</span> String&gt; temp)</span>&#123;    <span class="comment">// 只能接收String或Object类型的泛型，String类的父类只有Object类</span></span><br><span class="line">        System.out.print(temp + <span class="string">&quot;, &quot;</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="如何理解-Java-中的泛型是伪泛型？"><a href="#如何理解-Java-中的泛型是伪泛型？" class="headerlink" title="如何理解 Java 中的泛型是伪泛型？"></a>如何理解 Java 中的泛型是伪泛型？</h3><p>泛型中类型擦除 Java 泛型这个特性是从 JDK 1.5 才开始加入的，因此为了兼容之前的版本，Java 泛型的实现采取了“伪泛型”的策略，即 Java 在语法上支持泛型，但是在编译阶段会进行所谓的“类型擦除”（Type Erasure），将所有的泛型表示（尖括号中的内容）都替换为具体的类型（其对应的原生态类型），就像完全没有泛型一样。</p>
+<hr>
+<p>转载面试</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://blog.fansl.com.cn">fanshenglong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://blog.fansl.com.cn/post/80b1e9f.html">http://blog.fansl.com.cn/post/80b1e9f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.fansl.com.cn" target="_blank">fansl的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/d97cffc3.html" title="Java基础-注解"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java基础-注解</div></div></a></div><div class="next-post pull-right"><a href="/post/8e067d70.html" title="Java基础-语法基础"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java基础-语法基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/5dd001c7.html" title="Java基础-异常"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-25</div><div class="title">Java基础-异常</div></div></a></div><div><a href="/post/d97cffc3.html" title="Java基础-注解"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">Java基础-注解</div></div></a></div><div><a href="/post/8e067d70.html" title="Java基础-语法基础"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">Java基础-语法基础</div></div></a></div><div><a href="/post/4c9ea4ae.html" title="面试官问分布式技术面试题，一脸懵逼怎么办?"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-21</div><div class="title">面试官问分布式技术面试题，一脸懵逼怎么办?</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">fanshenglong</div><div class="author-info__description">记录一些日常工作中遇到的问题</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fanshenglong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fanshenglong" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://gitee.com/fanshenglong" target="_blank" title="Gitee"><i class="fab fa-github-square" style="color: #292dff;"></i></a><a class="social-icon" href="mailto:765900933@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B3%9B%E5%9E%8B%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">为什么需要泛型？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%80%82%E7%94%A8%E4%BA%8E%E5%A4%9A%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%89%A7%E8%A1%8C%E7%9B%B8%E5%90%8C%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.</span> <span class="toc-text">1.适用于多种数据类型执行相同的代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%B3%9B%E5%9E%8B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%9C%A8%E4%BD%BF%E7%94%A8%E6%97%B6%E6%8C%87%E5%AE%9A%EF%BC%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%9A%E6%A3%80%E6%9F%A5%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">2.泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">泛型类如何定义使用？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%B1%BB%E7%9C%8B%E8%B5%B7%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">从一个简单的泛型类看起：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E6%B3%9B%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">多元泛型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">泛型接口如何定义使用？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.1.</span> <span class="toc-text">简单的泛型接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">泛型方法如何定义使用？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">定义泛型方法语法格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">调用泛型方法语法格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%B8%8A%E9%99%90%E5%92%8C%E4%B8%8B%E9%99%90%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">泛型的上限和下限？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E9%99%90"><span class="toc-number">5.1.</span> <span class="toc-text">上限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E9%99%90"><span class="toc-number">5.2.</span> <span class="toc-text">下限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3-Java-%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B%E6%98%AF%E4%BC%AA%E6%B3%9B%E5%9E%8B%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">如何理解 Java 中的泛型是伪泛型？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/9474526c.html" title="comment"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="comment"/></a><div class="content"><a class="title" href="/post/9474526c.html" title="comment">comment</a><time datetime="2023-11-10T14:34:11.000Z" title="发表于 2023-11-10 22:34:11">2023-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a5ca6cbb.html" title="hello wolrd!"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hello wolrd!"/></a><div class="content"><a class="title" href="/post/a5ca6cbb.html" title="hello wolrd!">hello wolrd!</a><time datetime="2023-11-10T02:30:38.425Z" title="发表于 2023-11-10 10:30:38">2023-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/5dd001c7.html" title="Java基础-异常"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础-异常"/></a><div class="content"><a class="title" href="/post/5dd001c7.html" title="Java基础-异常">Java基础-异常</a><time datetime="2022-07-25T03:42:08.000Z" title="发表于 2022-07-25 11:42:08">2022-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/d97cffc3.html" title="Java基础-注解"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础-注解"/></a><div class="content"><a class="title" href="/post/d97cffc3.html" title="Java基础-注解">Java基础-注解</a><time datetime="2022-07-21T09:22:56.000Z" title="发表于 2022-07-21 17:22:56">2022-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/80b1e9f.html" title="Java基础-泛型"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础-泛型"/></a><div class="content"><a class="title" href="/post/80b1e9f.html" title="Java基础-泛型">Java基础-泛型</a><time datetime="2022-07-21T08:44:09.000Z" title="发表于 2022-07-21 16:44:09">2022-07-21</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient( 135deg, #E2B0FF 10%, #9F44D3 100%)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By fanshenglong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2364053447" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-lrctype="1" data-preload="none" data-autoplay="true" muted></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
