@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://blog.fansl.com.cn/post/8ebbbb0f.html</loc>
+    <loc>http://blog.fansl.com.cn/post/8e067d70.html</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://blog.fansl.com.cn/post/8e067d70.html</loc>
+    <loc>http://blog.fansl.com.cn/post/8ebbbb0f.html</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -203,6 +203,13 @@
   </url>
   
   <url>
+    <loc>http://blog.fansl.com.cn/tags/linux/</loc>
+    <lastmod>2023-12-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.fansl.com.cn/tags/Hexo/</loc>
     <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -211,13 +218,6 @@
   
   <url>
     <loc>http://blog.fansl.com.cn/tags/Butterfly/</loc>
-    <lastmod>2023-12-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.fansl.com.cn/tags/linux/</loc>
     <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -247,6 +247,13 @@
   </url>
   
   <url>
+    <loc>http://blog.fansl.com.cn/categories/linux/</loc>
+    <lastmod>2023-12-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.fansl.com.cn/categories/Hexo/</loc>
     <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -261,7 +268,7 @@
   </url>
   
   <url>
-    <loc>http://blog.fansl.com.cn/categories/linux/</loc>
+    <loc>http://blog.fansl.com.cn/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -269,13 +276,6 @@
   
   <url>
     <loc>http://blog.fansl.com.cn/categories/Hexo/butterfly/</loc>
-    <lastmod>2023-12-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.fansl.com.cn/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2023-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
